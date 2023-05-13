@@ -1,0 +1,11 @@
+.navbar {
+  padding: 0;
+}
+.nav-link {
+  font-weight: 700;
+  color: black;
+  &.active {
+    color: #8231d3 !important;
+    text-decoration: underline;
+  }
+}

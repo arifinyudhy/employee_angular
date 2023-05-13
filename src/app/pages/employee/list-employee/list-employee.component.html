@@ -1,0 +1,79 @@
+<div class="row p-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header color-dark fw-500">
+        <span>List Employee</span>
+        <button class="btn btn-info btn-sm">Add Employee</button>
+      </div>
+      <div class="card-body p-0">
+        <div class="table4 p-25 mb-30">
+          <div class="table-responsive">
+            <table
+              mat-table
+              [dataSource]="dataSource"
+              matSort
+              matSortActive="id"
+              matSortDirection="asc"
+              matSortDisableClear
+            >
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.firstName }} {{ element.lastName }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="basicSalary">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Salary
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.basicSalary }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell *matCellDef="let element">
+                  <div class="d-flex gap-2">
+                    <button
+                      class="btn btn-primary btn-sm"
+                      (click)="onAction(element.id, 'view')"
+                    >
+                      Detail
+                    </button>
+                    <button
+                      class="btn btn-info btn-sm"
+                      (click)="onAction(element.id, 'edit')"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      (click)="onAction(element.id, 'delete')"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+
+            <mat-paginator
+              [pageSizeOptions]="[10, 20, 50]"
+              showFirstLastButtons
+            >
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

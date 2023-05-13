@@ -1,6 +1,8 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { registerLocaleData } from '@angular/common';
+import localeId from '@angular/common/locales/id';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -13,6 +15,8 @@ import { DetailEmployeeComponent } from './pages/employee/detail-employee/detail
 import { FormEmployeeComponent } from './pages/employee/form-employee/form-employee.component';
 import { ListEmployeeComponent } from './pages/employee/list-employee/list-employee.component';
 import { LoginComponent } from './pages/login/login.component';
+
+registerLocaleData(localeId, 'id-ID');
 
 @NgModule({
   declarations: [
@@ -32,7 +36,7 @@ import { LoginComponent } from './pages/login/login.component';
     MatPaginatorModule,
     MatSortModule,
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'id-ID' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

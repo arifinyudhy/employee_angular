@@ -18,11 +18,15 @@
           </div>
           <div class="detail-item">
             <span class="label">Birth Date</span>
-            <span class="value">{{ employee?.birthDate }}</span>
+            <span class="value">{{
+              employee?.birthDate | date : "fullDate"
+            }}</span>
           </div>
           <div class="detail-item">
             <span class="label">Basic Salary</span>
-            <span class="value">{{ employee?.basicSalary }}</span>
+            <span class="value">{{
+              employee?.basicSalary | currency : "Rp"
+            }}</span>
           </div>
           <div class="detail-item">
             <span class="label">Status</span>

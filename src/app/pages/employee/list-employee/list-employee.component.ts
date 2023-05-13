@@ -3,7 +3,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { IEmployee } from 'src/app/interfaces/empoyee.interface';
+import {
+  IEmployee,
+  IFilterEmployee,
+} from 'src/app/interfaces/empoyee.interface';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
@@ -20,17 +23,29 @@ export class ListEmployeeComponent implements OnInit {
     private router: Router
   ) {}
   employees: Array<IEmployee> = [];
-  displayedColumns: string[] = ['id', 'firstName', 'basicSalary', 'action'];
+  displayedColumns: string[] = [
+    'id',
+    'firstName',
+    'email',
+    'basicSalary',
+    'action',
+  ];
   dataSource = new MatTableDataSource<IEmployee>(
     this.employeeService.getEmployees()
   );
+  filter: IFilterEmployee = { name: '', email: '' };
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
   ngOnInit(): void {
+    this.filter = this.employeeService.filterEmployee;
+    this.getEmployees();
+  }
+  getEmployees() {
     this.employees = this.employeeService.getEmployees();
+    this.dataSource.data = this.employees;
   }
   onAction(id: number, action: 'delete' | 'edit' | 'view') {
     switch (action) {
@@ -48,15 +63,12 @@ export class ListEmployeeComponent implements OnInit {
     this.router.navigate(['employee', id]);
   }
   deleteEmployee(id: number) {
-    const employee = this.employees.find((e) => e.id == id);
-    if (!employee) return;
-    const index = this.employees.indexOf(employee);
-    this.employees.splice(index, 1);
-    this.refectEmployee();
+    this.employeeService.deleteEmployee(id);
+    this.getEmployees();
   }
 
-  refectEmployee() {
-    this.dataSource.data = this.employees;
-    this.employeeService.setEmployees(this.employees);
+  onChangeFilter() {
+    this.employeeService.setFilter(this.filter);
+    this.getEmployees();
   }
 }

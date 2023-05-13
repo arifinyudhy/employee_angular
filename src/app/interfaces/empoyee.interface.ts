@@ -9,3 +9,7 @@ export interface IEmployee {
   group: string;
   description: string;
 }
+export interface IFilterEmployee {
+  name: string;
+  email: string;
+}

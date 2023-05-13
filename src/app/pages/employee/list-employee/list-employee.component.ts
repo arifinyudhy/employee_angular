@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { IEmployee } from 'src/app/interfaces/empoyee.interface';
 import { EmployeeService } from 'src/app/services/employee.service';
 
@@ -14,7 +15,10 @@ export class ListEmployeeComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
-  constructor(private employeeService: EmployeeService) {}
+  constructor(
+    private employeeService: EmployeeService,
+    private router: Router
+  ) {}
   employees: Array<IEmployee> = [];
   displayedColumns: string[] = ['id', 'firstName', 'basicSalary', 'action'];
   dataSource = new MatTableDataSource<IEmployee>(
@@ -33,10 +37,15 @@ export class ListEmployeeComponent implements OnInit {
       case 'delete':
         this.deleteEmployee(id);
         break;
-
+      case 'view':
+        this.viewDetail(id);
+        break;
       default:
         break;
     }
+  }
+  viewDetail(id: number) {
+    this.router.navigate(['employee', id]);
   }
   deleteEmployee(id: number) {
     const employee = this.employees.find((e) => e.id == id);
@@ -48,6 +57,6 @@ export class ListEmployeeComponent implements OnInit {
 
   refectEmployee() {
     this.dataSource.data = this.employees;
-    this.employeeService.setEmployee(this.employees);
+    this.employeeService.setEmployees(this.employees);
   }
 }

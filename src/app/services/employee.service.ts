@@ -13,7 +13,10 @@ export class EmployeeService {
   getEmployees() {
     return this.employees;
   }
-  setEmployee(employees: Array<IEmployee>) {
+  getEmployee(id: number) {
+    return this.employees.find((x) => x.id === id);
+  }
+  setEmployees(employees: Array<IEmployee>) {
     this.employees = employees;
   }
   getLastId() {

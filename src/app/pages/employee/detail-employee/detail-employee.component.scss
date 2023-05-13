@@ -1,0 +1,12 @@
+.detail-item {
+  margin: 10px 50px;
+  display: flex;
+  justify-content: space-between;
+  .label {
+    font-weight: 700;
+    width: 50%;
+  }
+  .value {
+    width: 50%;
+  }
+}

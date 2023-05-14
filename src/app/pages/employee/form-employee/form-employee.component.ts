@@ -31,17 +31,17 @@ export class FormEmployeeComponent implements OnInit {
       employee ? this.formEmployee.setValue(employee) : this.backToList();
     }
 
-    this.formEmployee.setValue({
-      id: this.idEmployee,
-      firstName: 'arifin',
-      lastName: 'yudi',
-      basicSalary: '16000000',
-      email: 'yudhyarifin@gmail.com',
-      birthDate: '1995-05-30',
-      status: 'dev',
-      group: 'DEV',
-      description: 'DEV',
-    });
+    // this.formEmployee.setValue({
+    //   id: this.idEmployee,
+    //   firstName: 'arifin',
+    //   lastName: 'yudi',
+    //   basicSalary: '16000000',
+    //   email: 'yudhyarifin@gmail.com',
+    //   birthDate: '1995-05-30',
+    //   status: 'dev',
+    //   group: 'DEV',
+    //   description: 'DEV',
+    // });
   }
   initialize() {
     //check form create or update

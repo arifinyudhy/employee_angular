@@ -32,10 +32,13 @@ export class FormEmployeeComponent implements OnInit {
     if (this.isEdit) {
       const employee = this.employeeService.getEmployee(this.idEmployee);
       if (employee) {
-        employee.basicSalary =
+        const formated =
           this.decimalPipe.transform(employee.basicSalary, '1.0', 'id-ID') ??
           '';
         this.formEmployee.setValue(employee);
+        this.formEmployee.patchValue({
+          basicSalary: formated,
+        });
       } else {
         this.backToList();
       }

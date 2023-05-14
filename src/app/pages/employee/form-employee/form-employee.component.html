@@ -1,1 +1,99 @@
-<p>form-employee works!</p>
+<div class="row p-4">
+  <div class="col-12">
+    <form [formGroup]="formEmployee" (ngSubmit)="onSubmit()">
+      <div class="card">
+        <div class="card-header color-dark fw-500">
+          <span>Form Employee</span>
+        </div>
+        <div class="card-body p-0 m-20">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="form-group w-50">
+                <label for="name">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="firstName"
+                  required
+                />
+              </div>
+              <div class="form-group w-50">
+                <label for="name">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="lastName"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Birth data</label>
+              <input
+                type="date"
+                class="form-control"
+                formControlName="birthDate"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Basic Salary</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="basicSalary"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Status</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="status"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Group</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="group"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Description</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="description"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex gap-2">
+          <button class="btn btn-sm btn-secondary" routerLink="">back</button>
+          <button
+            type="submit"
+            class="btn btn-primary btn-sm"
+            [disabled]="!formEmployee.valid"
+          >
+            {{ isEdit ? "Update Employee" : "Add Employee" }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

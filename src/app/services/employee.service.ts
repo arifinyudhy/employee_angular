@@ -37,12 +37,23 @@ export class EmployeeService {
     this.employees = employees;
   }
   getLastId() {
-    return this.lastId;
+    return this.lastId + 1;
   }
   setLastId(id: number) {
     this.lastId = id;
   }
   deleteEmployee(id: number) {
     this.deletedId.push(id);
+  }
+  addEmployee(employee: IEmployee) {
+    this.employees.push(employee);
+    this.setLastId(this.getLastId());
+  }
+  updateEmployee(employee: IEmployee) {
+    const existing = this.employees.find((x) => x.id === employee.id);
+    if (existing) {
+      const index = this.employees.indexOf(existing);
+      this.employees[index] = employee;
+    }
   }
 }

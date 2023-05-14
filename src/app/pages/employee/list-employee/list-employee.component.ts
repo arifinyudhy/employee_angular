@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -20,7 +20,8 @@ export class ListEmployeeComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   constructor(
     private employeeService: EmployeeService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
   employees: Array<IEmployee> = [];
   displayedColumns: string[] = [
@@ -38,6 +39,7 @@ export class ListEmployeeComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.cdr.detectChanges();
   }
   ngOnInit(): void {
     this.filter = this.employeeService.filterEmployee;
@@ -55,12 +57,18 @@ export class ListEmployeeComponent implements OnInit {
       case 'view':
         this.viewDetail(id);
         break;
+      case 'edit':
+        this.editEmployee(id);
+        break;
       default:
         break;
     }
   }
   viewDetail(id: number) {
     this.router.navigate(['employee', id]);
+  }
+  editEmployee(id: number) {
+    this.router.navigate(['employee/edit', id]);
   }
   deleteEmployee(id: number) {
     this.employeeService.deleteEmployee(id);

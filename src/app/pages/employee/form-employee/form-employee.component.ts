@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -15,6 +16,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
   styleUrls: ['./form-employee.component.scss'],
 })
 export class FormEmployeeComponent implements OnInit {
+  currencyChars = new RegExp('[,.]', 'g');
   formEmployee!: FormGroup;
   isEdit: boolean = false;
   idEmployee: number = 0;
@@ -22,13 +24,21 @@ export class FormEmployeeComponent implements OnInit {
     private fb: FormBuilder,
     private employeeService: EmployeeService,
     private router: Router,
-    private activatedRouter: ActivatedRoute
+    private activatedRouter: ActivatedRoute,
+    private decimalPipe: DecimalPipe
   ) {}
   ngOnInit(): void {
     this.initialize();
     if (this.isEdit) {
       const employee = this.employeeService.getEmployee(this.idEmployee);
-      employee ? this.formEmployee.setValue(employee) : this.backToList();
+      if (employee) {
+        employee.basicSalary =
+          this.decimalPipe.transform(employee.basicSalary, '1.0', 'id-ID') ??
+          '';
+        this.formEmployee.setValue(employee);
+      } else {
+        this.backToList();
+      }
     }
 
     // this.formEmployee.setValue({
@@ -70,9 +80,12 @@ export class FormEmployeeComponent implements OnInit {
       alert('form invalid');
       return;
     }
-
     const employee: IEmployee = this.formEmployee.value;
-    // employee.id = this.idEmployee;
+    const salary = this.formEmployee.value.basicSalary;
+    const salaryValue = parseInt(
+      String(salary).replace(this.currencyChars, '')
+    );
+    employee.basicSalary = salaryValue;
     this.isEdit
       ? this.employeeService.updateEmployee(employee)
       : this.employeeService.addEmployee(employee);

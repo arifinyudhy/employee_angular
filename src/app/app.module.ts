@@ -1,7 +1,7 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { registerLocaleData } from '@angular/common';
+import { CurrencyPipe, DecimalPipe, registerLocaleData } from '@angular/common';
 import localeId from '@angular/common/locales/id';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { CurrencyDirective } from './directive/currency.directive';
 import { DetailEmployeeComponent } from './pages/employee/detail-employee/detail-employee.component';
 import { FormEmployeeComponent } from './pages/employee/form-employee/form-employee.component';
 import { ListEmployeeComponent } from './pages/employee/list-employee/list-employee.component';
@@ -26,6 +27,7 @@ registerLocaleData(localeId, 'id-ID');
     ListEmployeeComponent,
     FormEmployeeComponent,
     DetailEmployeeComponent,
+    CurrencyDirective,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,11 @@ registerLocaleData(localeId, 'id-ID');
     MatSortModule,
     ReactiveFormsModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'id-ID' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'id-ID' },
+    DecimalPipe,
+    CurrencyPipe,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

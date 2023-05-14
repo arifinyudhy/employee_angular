@@ -4,7 +4,7 @@ export interface IEmployee {
   lastName: string;
   email: string;
   birthDate: string;
-  basicSalary: number;
+  basicSalary: number | string;
   status: string;
   group: string;
   description: string;

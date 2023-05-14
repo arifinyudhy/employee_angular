@@ -20,6 +20,7 @@ export class FormEmployeeComponent implements OnInit {
   formEmployee!: FormGroup;
   isEdit: boolean = false;
   idEmployee: number = 0;
+  maxDate = new Date();
   constructor(
     private fb: FormBuilder,
     private employeeService: EmployeeService,

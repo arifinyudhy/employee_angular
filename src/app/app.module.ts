@@ -4,6 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CurrencyPipe, DecimalPipe, registerLocaleData } from '@angular/common';
 import localeId from '@angular/common/locales/id';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -16,7 +20,6 @@ import { DetailEmployeeComponent } from './pages/employee/detail-employee/detail
 import { FormEmployeeComponent } from './pages/employee/form-employee/form-employee.component';
 import { ListEmployeeComponent } from './pages/employee/list-employee/list-employee.component';
 import { LoginComponent } from './pages/login/login.component';
-
 registerLocaleData(localeId, 'id-ID');
 
 @NgModule({
@@ -38,6 +41,10 @@ registerLocaleData(localeId, 'id-ID');
     MatPaginatorModule,
     MatSortModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatInputModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'id-ID' },
